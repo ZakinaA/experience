@@ -14,6 +14,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class EtudiantFormType extends AbstractType
 {
@@ -23,6 +26,18 @@ class EtudiantFormType extends AbstractType
     {
         $builder
             ->add('nom')
+
+            ->add('nbHeures', TextType::class, 
+            [
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex([
+                        'pattern' => '/^\d{1,2}:\d{2}$/',
+                        'message' => 'L\'heure doit être au format HH:mm',
+                    ]),
+                ]
+            ])
+
             ->add('message', null, [
                 'attr' => ['rows' => 5]
             ])

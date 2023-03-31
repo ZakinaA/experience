@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
@@ -22,13 +23,17 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $em->persist($etudiant);
             $em->flush();
 
-            $this->addFlash('success', 'Thanks for your message. We\'ll get back to you shortly.');
+            $this->addFlash('success', 'Super, ça marche. va vérifier en bdd');
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->renderForm('home.html.twig', compact('form'));
+        return $this->renderForm('etudiant_add.html.twig', compact('form'));
     }
+
+    
+
 }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as HeureAssert;
 
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
@@ -45,6 +46,12 @@ class Etudiant
      * @Assert\NotBlank(message="You need to select your ville")
      */
     private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     * @HeureAssert\Heure(message="Le format de nb heures doit être hh:mm où hh compris entre 0 et 99 et mm entre 0 et 59")]
+     */
+    private $nbHeures;
 
     public function getId(): ?int
     {
@@ -95,6 +102,18 @@ class Etudiant
     public function setVille(?Ville $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getNbHeures(): ?string
+    {
+        return $this->nbHeures;
+    }
+
+    public function setNbHeures(?string $nbHeures): self
+    {
+        $this->nbHeures = $nbHeures;
 
         return $this;
     }
