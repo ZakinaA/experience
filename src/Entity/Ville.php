@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=VilleRepository::class)
- * @ORM\Table(name="cities")
+ * @ORM\Table(name="ville")
  */
 class Ville
 {
@@ -23,10 +23,10 @@ class Ville
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="cities")
+     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="villes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $departement;
@@ -46,14 +46,14 @@ class Ville
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    public function setNom(string $nom): self
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }

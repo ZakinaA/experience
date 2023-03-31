@@ -20,10 +20,10 @@ class DepartementRepository extends ServiceEntityRepository
         parent::__construct($registry, Departement::class);
     }
 
-    public function findAllOrderedByAscNameQueryBuilder(): QueryBuilder
+    public function findAllOrderedByNomQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('c')
-            ->orderBy('c.name', 'ASC');
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.nom', 'ASC');
     }
 
 

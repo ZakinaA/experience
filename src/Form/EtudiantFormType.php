@@ -22,27 +22,27 @@ class EtudiantFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('nom')
             ->add('message', null, [
                 'attr' => ['rows' => 5]
             ])
             ->add('departement', EntityType::class, [
                 'class' => Departement::class,
-                'choice_label' => 'name',
+                'choice_label' => 'nom',
                 'placeholder' => 'Choose a departement',
                 'query_builder' => fn (DepartementRepository $departementRepository) =>
-                $departementRepository->findAllOrderedByAscNameQueryBuilder()
+                $departementRepository->findAllOrderedByNomQueryBuilder()
             ]);
 
         $formModifier = function (FormInterface $form, Departement $departement = null) {
-            $cities = $departement === null ? [] : $this->villeRepository->findByDepartementOrderedByAscName($departement);
+            $villes = $departement === null ? [] : $this->villeRepository->findByDepartementOrderedByNom($departement);
 
             $form->add('ville', EntityType::class, [
                 'class' => Ville::class,
-                'choice_label' => 'name',
+                'choice_label' => 'nom',
                 'disabled' => $departement === null,
                 'placeholder' => 'Choose a ville',
-                'choices' => $cities
+                'choices' => $villes
             ]);
         };
 

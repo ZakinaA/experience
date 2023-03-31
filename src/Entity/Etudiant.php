@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
- * @ORM\Table(name="etudiants")
+ * @ORM\Table(name="etudiant")
  */
 class Etudiant
 {
@@ -23,7 +23,7 @@ class Etudiant
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Please enter your name")
      */
-    private $name;
+    private $nom;
 
     /**
      * @ORM\Column(type="text")
@@ -51,14 +51,14 @@ class Etudiant
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    public function setNom(string $nom): self
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }

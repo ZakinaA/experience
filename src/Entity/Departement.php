@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DepartementRepository::class)
- * @ORM\Table(name="departements")
+ * @ORM\Table(name="departement")
  */
 class Departement
 {
@@ -23,12 +23,12 @@ class Departement
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=Ville::class, mappedBy="departement", orphanRemoval=true)
      */
-    private $cities;
+    private $villes;
 
     /**
      * @ORM\OneToMany(targetEntity=Etudiant::class, mappedBy="departement", orphanRemoval=true)
@@ -37,7 +37,7 @@ class Departement
 
     public function __construct()
     {
-        $this->cities = new ArrayCollection();
+        $this->villes = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
     }
 
@@ -46,14 +46,14 @@ class Departement
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    public function setNom(string $nom): self
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -61,15 +61,15 @@ class Departement
     /**
      * @return Collection|Ville[]
      */
-    public function getCities(): Collection
+    public function getVilles(): Collection
     {
-        return $this->cities;
+        return $this->villes;
     }
 
     public function addVille(Ville $ville): self
     {
-        if (!$this->cities->contains($ville)) {
-            $this->cities[] = $ville;
+        if (!$this->villes->contains($ville)) {
+            $this->villes[] = $ville;
             $ville->setDepartement($this);
         }
 
@@ -78,7 +78,7 @@ class Departement
 
     public function removeVille(Ville $ville): self
     {
-        if ($this->cities->removeElement($ville)) {
+        if ($this->villes->removeElement($ville)) {
             // set the owning side to null (unless already changed)
             if ($ville->getDepartement() === $this) {
                 $ville->setDepartement(null);

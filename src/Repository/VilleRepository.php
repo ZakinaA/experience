@@ -21,12 +21,12 @@ class VilleRepository extends ServiceEntityRepository
         parent::__construct($registry, Ville::class);
     }
 
-    public function findByDepartementOrderedByAscName(Departement $departement): array
+    public function findByDepartementOrderedByNom(Departement $departement): array
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.departement = :departement')
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.departement = :departement')
             ->setParameter('departement', $departement)
-            ->orderBy('c.name', 'ASC')
+            ->orderBy('v.nom', 'ASC')
             ->getQuery()
             ->getResult();
     }
