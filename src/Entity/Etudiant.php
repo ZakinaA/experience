@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\TicketRepository;
+use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=TicketRepository::class)
- * @ORM\Table(name="tickets")
+ * @ORM\Entity(repositoryClass=EtudiantRepository::class)
+ * @ORM\Table(name="etudiants")
  */
-class Ticket
+class Etudiant
 {
     /**
      * @ORM\Id
@@ -33,18 +33,18 @@ class Ticket
     private $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="tickets")
+     * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="etudiants")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="You need to select your country")
+     * @Assert\NotBlank(message="You need to select your departement")
      */
-    private $country;
+    private $departement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="tickets")
+     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="etudiants")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="You need to select your city")
+     * @Assert\NotBlank(message="You need to select your ville")
      */
-    private $city;
+    private $ville;
 
     public function getId(): ?int
     {
@@ -75,26 +75,26 @@ class Ticket
         return $this;
     }
 
-    public function getCountry(): ?Country
+    public function getDepartement(): ?Departement
     {
-        return $this->country;
+        return $this->departement;
     }
 
-    public function setCountry(?Country $country): self
+    public function setDepartement(?Departement $departement): self
     {
-        $this->country = $country;
+        $this->departement = $departement;
 
         return $this;
     }
 
-    public function getCity(): ?City
+    public function getVille(): ?Ville
     {
-        return $this->city;
+        return $this->ville;
     }
 
-    public function setCity(?City $city): self
+    public function setVille(?Ville $ville): self
     {
-        $this->city = $city;
+        $this->ville = $ville;
 
         return $this;
     }

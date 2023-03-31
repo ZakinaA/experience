@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Ticket;
-use App\Form\TicketFormType;
+use App\Entity\Etudiant;
+use App\Form\EtudiantFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,14 +15,14 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
-        $ticket = new Ticket;
+        $etudiant = new Etudiant;
 
-        $form = $this->createForm(TicketFormType::class, $ticket);
+        $form = $this->createForm(EtudiantFormType::class, $etudiant);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($ticket);
+            $em->persist($etudiant);
             $em->flush();
 
             $this->addFlash('success', 'Thanks for your message. We\'ll get back to you shortly.');

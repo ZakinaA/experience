@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\City;
-use App\Entity\Country;
+use App\Entity\Ville;
+use App\Entity\Departement;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -12,20 +12,20 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // France
-        $france = new Country;
+        $france = new Departement;
         $france->setName('France');
 
-        $paris = new City;
+        $paris = new Ville;
         $paris->setName('Paris');
-        $paris->setCountry($france);
+        $paris->setDepartement($france);
 
-        $marseille = new City;
+        $marseille = new Ville;
         $marseille->setName('Marseille');
-        $marseille->setCountry($france);
+        $marseille->setDepartement($france);
 
-        $lyon = new City;
+        $lyon = new Ville;
         $lyon->setName('Lyon');
-        $lyon->setCountry($france);
+        $lyon->setDepartement($france);
 
         $manager->persist($france);
         $manager->persist($paris);
@@ -33,20 +33,20 @@ class AppFixtures extends Fixture
         $manager->persist($lyon);
 
         // Canada
-        $canada = new Country;
+        $canada = new Departement;
         $canada->setName('Canada');
 
-        $quebec = new City;
+        $quebec = new Ville;
         $quebec->setName('Québec');
-        $quebec->setCountry($canada);
+        $quebec->setDepartement($canada);
 
-        $montreal = new City;
+        $montreal = new Ville;
         $montreal->setName('Montréal');
-        $montreal->setCountry($canada);
+        $montreal->setDepartement($canada);
 
-        $troisRivieres = new City;
+        $troisRivieres = new Ville;
         $troisRivieres->setName('Trois-Rivières');
-        $troisRivieres->setCountry($canada);
+        $troisRivieres->setDepartement($canada);
 
         $manager->persist($canada);
         $manager->persist($quebec);
@@ -54,20 +54,20 @@ class AppFixtures extends Fixture
         $manager->persist($troisRivieres);
 
         // Côte d'ivoire
-        $coteDivoire = new Country;
+        $coteDivoire = new Departement;
         $coteDivoire->setName("Côte d'ivoire");
 
-        $abidjan = new City;
+        $abidjan = new Ville;
         $abidjan->setName('Abidjan');
-        $abidjan->setCountry($coteDivoire);
+        $abidjan->setDepartement($coteDivoire);
 
-        $yamoussoukro = new City;
+        $yamoussoukro = new Ville;
         $yamoussoukro->setName('Yamoussoukro');
-        $yamoussoukro->setCountry($coteDivoire);
+        $yamoussoukro->setDepartement($coteDivoire);
 
-        $bouake = new City;
+        $bouake = new Ville;
         $bouake->setName('Bouaké');
-        $bouake->setCountry($coteDivoire);
+        $bouake->setDepartement($coteDivoire);
 
         $manager->persist($coteDivoire);
         $manager->persist($abidjan);

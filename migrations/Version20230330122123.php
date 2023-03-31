@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210904125506 extends AbstractMigration
+final class Version20230330122123 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Create departements and cities tables';
+        return '';
     }
 
     public function up(Schema $schema): void
@@ -22,14 +22,20 @@ final class Version20210904125506 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE cities (id INT AUTO_INCREMENT NOT NULL, departement_id INT NOT NULL, name VARCHAR(255) NOT NULL, INDEX IDX_D95DB16BF92F3E70 (departement_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE departements (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE etudiants (id INT AUTO_INCREMENT NOT NULL, departement_id INT NOT NULL, ville_id INT NOT NULL, name VARCHAR(255) NOT NULL, message LONGTEXT NOT NULL, INDEX IDX_54469DF4F92F3E70 (departement_id), INDEX IDX_54469DF48BAC62AF (ville_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE cities ADD CONSTRAINT FK_D95DB16BF92F3E70 FOREIGN KEY (departement_id) REFERENCES departements (id)');
+        $this->addSql('ALTER TABLE etudiants ADD CONSTRAINT FK_54469DF4F92F3E70 FOREIGN KEY (departement_id) REFERENCES departements (id)');
+        $this->addSql('ALTER TABLE etudiants ADD CONSTRAINT FK_54469DF48BAC62AF FOREIGN KEY (ville_id) REFERENCES cities (id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE cities DROP FOREIGN KEY FK_D95DB16BF92F3E70');
+        $this->addSql('ALTER TABLE etudiants DROP FOREIGN KEY FK_54469DF4F92F3E70');
+        $this->addSql('ALTER TABLE etudiants DROP FOREIGN KEY FK_54469DF48BAC62AF');
         $this->addSql('DROP TABLE cities');
         $this->addSql('DROP TABLE departements');
+        $this->addSql('DROP TABLE etudiants');
     }
 }

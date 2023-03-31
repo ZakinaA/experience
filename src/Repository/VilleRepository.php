@@ -2,37 +2,37 @@
 
 namespace App\Repository;
 
-use App\Entity\City;
-use App\Entity\Country;
+use App\Entity\Ville;
+use App\Entity\Departement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method City|null find($id, $lockMode = null, $lockVersion = null)
- * @method City|null findOneBy(array $criteria, array $orderBy = null)
- * @method City[]    findAll()
- * @method City[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Ville|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Ville|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Ville[]    findAll()
+ * @method Ville[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CityRepository extends ServiceEntityRepository
+class VilleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, City::class);
+        parent::__construct($registry, Ville::class);
     }
 
-    public function findByCountryOrderedByAscName(Country $country): array
+    public function findByDepartementOrderedByAscName(Departement $departement): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.country = :country')
-            ->setParameter('country', $country)
+            ->andWhere('c.departement = :departement')
+            ->setParameter('departement', $departement)
             ->orderBy('c.name', 'ASC')
             ->getQuery()
             ->getResult();
     }
 
     // /**
-    //  * @return City[] Returns an array of City objects
+    //  * @return Ville[] Returns an array of Ville objects
     //  */
     /*
     public function findByExampleField($value)
@@ -49,7 +49,7 @@ class CityRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?City
+    public function findOneBySomeField($value): ?Ville
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
