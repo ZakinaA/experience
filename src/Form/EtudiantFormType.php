@@ -29,7 +29,7 @@ class EtudiantFormType extends AbstractType
             ->add('departement', EntityType::class, [
                 'class' => Departement::class,
                 'choice_label' => 'nom',
-                'placeholder' => 'Choose a departement',
+                'placeholder' => 'Choisir un département',
                 'query_builder' => fn (DepartementRepository $departementRepository) =>
                 $departementRepository->findAllOrderedByNomQueryBuilder()
             ]);
@@ -41,7 +41,7 @@ class EtudiantFormType extends AbstractType
                 'class' => Ville::class,
                 'choice_label' => 'nom',
                 'disabled' => $departement === null,
-                'placeholder' => 'Choose a ville',
+                'placeholder' => 'Choisir une ville',
                 'choices' => $villes
             ]);
         };

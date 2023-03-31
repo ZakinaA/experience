@@ -1,11 +1,11 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title 'Contact' %}
+{% block title 'Poudlard' %}
 
 {% block body %}
     <div class="row">
         <div class="col-6 mx-auto">
-            <h1 class="display-4 my-5">Are you facing any <span class="text-danger">issues</span> 😔?</h1>
+            <h1 class="display-4 my-5">Ajouter un étudiant</h1>
 
             {{ form_start(form) }}
                 {% if form.vars.errors is not empty %}
@@ -19,7 +19,7 @@
                 {{ form_row(form.ville) }}
                 {{ form_row(form.message) }}
 
-                <button type="submit" class="btn btn-primary w-100" formnovalidate>Send</button>
+                <button type="submit" class="btn btn-primary w-100" formnovalidate>Inscrire</button>
             {{ form_end(form) }}
         </div>
     </div>
