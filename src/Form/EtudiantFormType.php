@@ -40,7 +40,8 @@ class EtudiantFormType extends AbstractType
 
             ->add('nbHeures2', TextType::class, 
             [
-                'mapped'=>false,
+                'mapped' => false,
+                'label' => 'nb heures 2, champ non mappé',
                 'constraints' => [
                     new NotBlank(),
                     new Regex([
