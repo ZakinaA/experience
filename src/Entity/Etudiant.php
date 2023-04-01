@@ -22,29 +22,22 @@ class Etudiant
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter your name")
+     * @Assert\NotBlank(message="Entrez un nom")
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Seems like your issue has been resolved :).")
-     * @Assert\Length(min=5)
-     */
-    private $message;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Departement::class, inversedBy="etudiants")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="You need to select your departement")
      */
+    //@Assert\NotBlank(message="Vous devez selectionner un département")
     private $departement;
 
     /**
      * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="etudiants")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="You need to select your ville")
      */
+    //@Assert\NotBlank(message="Vous devez selectionner une ville")
     private $ville;
 
     /**
@@ -70,17 +63,7 @@ class Etudiant
         return $this;
     }
 
-    public function getMessage(): ?string
-    {
-        return $this->message;
-    }
 
-    public function setMessage(string $message): self
-    {
-        $this->message = $message;
-
-        return $this;
-    }
 
     public function getDepartement(): ?Departement
     {

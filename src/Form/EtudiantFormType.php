@@ -38,12 +38,22 @@ class EtudiantFormType extends AbstractType
                 ]
             ])
 
-            ->add('message', null, [
-                'attr' => ['rows' => 5]
+            ->add('nbHeures2', TextType::class, 
+            [
+                'mapped'=>false,
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex([
+                        'pattern' => '/^\d{1,2}:\d{2}$/',
+                        'message' => 'L\'heure doit être au format HH:mm',
+                    ]),
+                
+                ]
             ])
             ->add('departement', EntityType::class, [
                 'class' => Departement::class,
                 'choice_label' => 'nom',
+                'required' => false,
                 'placeholder' => 'Choisir un département',
                 'query_builder' => fn (DepartementRepository $departementRepository) =>
                 $departementRepository->findAllOrderedByNomQueryBuilder()
@@ -55,6 +65,7 @@ class EtudiantFormType extends AbstractType
             $form->add('ville', EntityType::class, [
                 'class' => Ville::class,
                 'choice_label' => 'nom',
+                'required' => false,
                 'disabled' => $departement === null,
                 'placeholder' => 'Choisir une ville',
                 'choices' => $villes
